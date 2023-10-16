@@ -1,0 +1,9 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+get_table_data:
+    path: /get-table-data/{param1}/{param2}
+    controller: App\Controller\TableController::getData
+

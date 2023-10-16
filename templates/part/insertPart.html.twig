@@ -1,0 +1,161 @@
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="table-responsive ">
+                        {% for conc in concours %}
+                            <form method="post" action="{{path ('resources_insertPart',{id: conc.id})}}">
+                                <div>
+                                    <label for="csv_file">Choisir un fichier CSV :</label>
+                                    <input type="file" id="csv_file" name="csv_file" accept=".csv, .txt">
+                                </div>
+
+                                <div id="participants-container"></div>
+                                <div>
+                                    <input type="submit" class="btn btn-primary px-5">
+                                </div>
+                            </form>
+                        {% endfor %}
+                        <a href="/indexuser" type="button" class="btn btn-success btn-sm btn-icon-text mr-3" >
+							retour
+							<i class="typcn typcn-edit btn-icon-append"></i>
+						</a>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<script>
+$(document).ready(function () {
+    var categoryMappings = {
+        "CLEc3": "Club Élite",
+        "CL1c3": "Club 1",
+        "CP1c3": "Poney 1",
+        "CL2c3": "Club 2",
+        "CP2c3": "Poney 2",
+        "CL3c2": "Club 3",
+        "CP3c2": "Poney 3",
+        "CA2c2": "Club A2",
+        "CL2eq": "Club 2 équipe",
+        "CL1eq": "Club 1 équipe",
+        "C1pa": "Club 1 paire"
+    };
+
+    var participants = [];
+    
+    $('body').on('change', '#csv_file', function (e) {
+        var file = e.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var contents = e.target.result;
+                participants = parseCSV(contents);
+                var categories = getCategories(participants);
+                displayCategories(categories);
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    function parseCSV(contents) {
+        var lines = contents.split('\n');
+        var participants = [];
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i].trim();
+            if (line) {
+                var values = line.split(';');
+                var participant = {
+                    nom: values[6].trim(),
+                    prenom: values[7].trim(),
+                    club: values[8].trim(),
+                    cheval: values[10].trim(),
+                    categorie: values[3].trim(),
+                    groupe1: true,
+                    groupe2: false
+                };
+                participants.push(participant);
+            }
+        }
+        return participants;
+    }
+
+    function getCategories(participants) {
+        var categories = [];
+        for (var i = 0; i < participants.length; i++) {
+            var participant = participants[i];
+            if (categories.indexOf(participant.categorie) === -1) {
+                categories.push(participant.categorie);
+            }
+        }
+        return categories;
+    }
+
+    function displayCategories(categories) {
+        var container = $('#participants-container');
+        container.empty();
+        if (categories.length > 0) {
+            let participantsOffset = 0;
+            for (var i = 0; i < categories.length; i++) {
+                var category = categories[i];
+                var categoryName = categoryMappings[category] || category;
+                var collapsible = $('<div class="collapsible"></div>');
+                var collapsibleHeader = $('<button class="collapsible-header">' + categoryName + '</button>');
+                var collapsibleContent = $('<div class="collapsible-content"></div>');
+                collapsible.append(collapsibleHeader);
+                collapsible.append(collapsibleContent);
+                container.append(collapsible);
+                var filteredParticipants = filterParticipantsByCategory(category);
+                let numFilteredParticipants = filteredParticipants.length;
+                displayParticipants(filteredParticipants, collapsibleContent, participantsOffset);
+                participantsOffset += numFilteredParticipants;
+            }
+            enableCollapsible();
+        } else {
+            container.html('Aucune catégorie trouvée.');
+        }
+    }
+
+    function filterParticipantsByCategory(category) {
+        return participants.filter(function (participant) {
+            return participant.categorie === category;
+        });
+    }
+
+    function displayParticipants(participants, container, offset) {
+        container.empty();
+        if (participants.length > 0) {
+            var table = $('<table class="table participants-table"></table>');
+            var thead = $('<thead class="th-color"><tr><th>Nom</th><th>Prénom</th><th>Club</th><th>Cheval</th><th>Groupe</th></tr></thead>');
+            var tbody = $('<tbody></tbody>');
+            for (var i = 0; i < participants.length; i++) {
+                var participant = participants[i];
+                let idx = i + offset;
+                var row = $('<tr><td><input type="text" name="participants[' + idx + '][nom]" value="' + participant.nom + '"></td><td><input type="text" name="participants[' + idx + '][prenom]" value="' + participant.prenom + '"></td><td><input type="text" name="participants[' + idx + '][club]" value="' + participant.club + '"></td><td><input type="text" name="participants[' + idx + '][cheval]" value="' + participant.cheval + '"></td><td><select name="participants[' + idx + '][groupe]"><option value="Groupe 1"' + (participant.groupe1 ? ' selected' : '') + '>Groupe 1</option><option value="Groupe 2"' + (participant.groupe2 ? ' selected' : '') + '>Groupe 2</option></select></td><input type="hidden" name="participants[' + idx + '][categorie]" value="' + participant.categorie + '"></tr>');
+                tbody.append(row);
+            }
+            table.append(thead);
+            table.append(tbody);
+            container.append(table);
+        } else {
+            container.append('<p>Aucun participant trouvé dans cette catégorie.</p>');
+        }
+    }
+
+    function enableCollapsible() {
+        $('.collapsible-header').click(function (e) {
+            e.preventDefault();
+            $(this).toggleClass('active');
+            $(this).next('.collapsible-content').slideToggle();
+        });
+    }
+});
+
+
+</script>

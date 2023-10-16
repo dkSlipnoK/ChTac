@@ -1,0 +1,43 @@
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="table-responsive ">
+						<table class="table table-striped project-orders-table" id="kids">
+							{# affichage des concours #}
+							
+								<thead class="th-color">
+									<tr>
+										<th colspan="5">Information sur le concours : </th>
+									</tr>
+								</thead>
+								<tbody class="tb-color">
+								{% for info in infoConc %}
+									<tr>
+										<td>{{ info.location }}</td>
+										<td>{{ info.dateD|date("d/m/Y") }}</td>
+										<td>{{ info.club }}</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							
+							<tbody class="tb-color">
+								{% for Cat in categories %}
+									{% for infoEp in epreuves %}
+											<tr>
+												<td colspan="2">Catégorie : {{ Cat.nom }}</td>
+												<td>Epreuve : {{ infoEp.nom }}</td>
+											</tr>
+									{% endfor %}
+								{% endfor %}
+							</tbody>
+						</table>
+						<a href="/indexuser" type="button" class="btn btn-success btn-sm btn-icon-text mr-3" >
+							retour
+							<i class="typcn typcn-edit btn-icon-append"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>

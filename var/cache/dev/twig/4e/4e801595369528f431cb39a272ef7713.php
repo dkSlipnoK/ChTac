@@ -1,0 +1,114 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+
+/* partials/_snav.html.twig */
+class __TwigTemplate_14e5395a074db31d3c9b569531dae13b extends Template
+{
+    private $source;
+    private $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+        ];
+    }
+
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "partials/_snav.html.twig"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "partials/_snav.html.twig"));
+
+        // line 1
+        echo "<!-- partial -->
+\t\t<nav class=\"navbar-breadcrumb col-xl-12 col-12 d-flex flex-row p-0\">
+\t\t\t<div class=\"navbar-links-wrapper d-flex align-items-stretch\">
+\t\t\t\t<div class=\"nav-link\">
+\t\t\t\t\t<a href=\"javascript:;\">
+\t\t\t\t\t\t<i class=\"typcn typcn-calendar-outline\"></i>
+\t\t\t\t\t</a>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"nav-link\">
+\t\t\t\t\t<a href=\"javascript:;\">
+\t\t\t\t\t\t<i class=\"typcn typcn-mail\"></i>
+\t\t\t\t\t</a>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"nav-link\">
+\t\t\t\t\t<a href=\"javascript:;\">
+\t\t\t\t\t\t<i class=\"typcn typcn-folder\"></i>
+\t\t\t\t\t</a>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"nav-link\">
+\t\t\t\t\t<a href=\"javascript:;\">
+\t\t\t\t\t\t<i class=\"typcn typcn-document-text\"></i>
+\t\t\t\t\t</a>
+\t\t\t\t</div>
+\t\t\t</div>
+\t\t</nav>";
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+    }
+
+    public function getTemplateName()
+    {
+        return "partials/_snav.html.twig";
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<!-- partial -->
+\t\t<nav class=\"navbar-breadcrumb col-xl-12 col-12 d-flex flex-row p-0\">
+\t\t\t<div class=\"navbar-links-wrapper d-flex align-items-stretch\">
+\t\t\t\t<div class=\"nav-link\">
+\t\t\t\t\t<a href=\"javascript:;\">
+\t\t\t\t\t\t<i class=\"typcn typcn-calendar-outline\"></i>
+\t\t\t\t\t</a>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"nav-link\">
+\t\t\t\t\t<a href=\"javascript:;\">
+\t\t\t\t\t\t<i class=\"typcn typcn-mail\"></i>
+\t\t\t\t\t</a>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"nav-link\">
+\t\t\t\t\t<a href=\"javascript:;\">
+\t\t\t\t\t\t<i class=\"typcn typcn-folder\"></i>
+\t\t\t\t\t</a>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"nav-link\">
+\t\t\t\t\t<a href=\"javascript:;\">
+\t\t\t\t\t\t<i class=\"typcn typcn-document-text\"></i>
+\t\t\t\t\t</a>
+\t\t\t\t</div>
+\t\t\t</div>
+\t\t</nav>", "partials/_snav.html.twig", "/home/marius/Desktop/symfonyTac/templates/partials/_snav.html.twig");
+    }
+}

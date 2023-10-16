@@ -1,0 +1,125 @@
+<div class="main-panel">
+	<div class="content-wrapper tabl-res">
+		<div class="container-scroller">
+			<div class="container-fluid page-body-wrapper">
+				<div class="main-panel">
+					<div class="content-wrapper">
+						<div class="row">
+							<div>
+								<div class="card">
+                                    <div class="table-responsive ">
+                                        <form method="post" action="{{path ('app_saveCont')}}">
+                                            <table class="table th-color project-orders-table " border="1px" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>Run / </br> Cible</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>Total </br> points </th>
+                                                        <th>Temps</th>													
+                                                        <th>Bonus </br>chrono </th>													
+                                                        <th>Bonus </br>cible </th>
+                                                        <th> Total </br> run </th>
+                                                        <th> Total </br> cumulé </th>
+                                                    </tr>
+                                                </thead>
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="11" class="table">Skirmish - 90m</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td><input type="text" step="1" class="table" name="cible1_r1"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible2_r1"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible3_r1"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible4_r1"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible5_r1"></td>
+                                                        <td></td>
+                                                        <td><input type="text" step="1" class="table" name="tmps_r1"></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td><input type="text" step="1" class="table" name="cible1_r2"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible2_r2"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible3_r2"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible4_r2"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible5_r2"></td>
+                                                        <td></td>
+                                                        <td><input type="text" step="1" class="table" name="tmps_r2"></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td><input type="text" step="1" class="table" name="cible1_r3"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible2_r3"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible3_r3"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible4_r3"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible5_r3"></td>
+                                                        <td></td>
+                                                        <td><input type="text" step="1" class="table" name="tmps_r3"></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td><input type="text" step="1" class="table" name="cible1_r4"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible2_r4"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible3_r4"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible4_r4"></td>
+                                                        <td><input type="text" step="1" class="table" name="cible5_r4"></td>
+                                                        <td></td>
+                                                        <td><input type="text" step="1" class="table" name="tmps_r4"></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td id="total"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div>
+                                                <input type="submit" class="btn btn-primary px-5">
+                                            </div>
+                                        </form>										
+                                    </div>
+                                </div>										
+                            </div>
+                        </div>										
+                    </div>
+                </div>					
+            </div>
+        </div>						
+    </div>
+</div>
+<script>
+    document.getElementById("total").style.backgroundColor = "#fffbb0";
+    $("#tableau_cetower td input[type=text]").on('change', (elem) => {
+        let parent = $(elem.target).parent().parent();
+        let fields = ['cibleav', 'ciblelat', 'ciblear'];
+
+        let sum = 0;
+        fields.forEach(field => {
+            parent.find(`[${field}]`).val().split(' ').forEach(num => {
+                if (num == '') return;
+                sum += parseInt(num);
+            });
+        });
+
+
+        // let sum = parseInt(parent.find('[cibleav]').val() || 0)+parseInt(parent.find('[ciblelat]').val() || 0)+parseInt(parent.find('[ciblear]').val() || 0);
+        parent.find('[points]').val(sum);
+    });
+</script>

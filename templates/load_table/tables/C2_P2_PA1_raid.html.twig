@@ -1,0 +1,142 @@
+<div class="main-panel">
+	<div class="content-wrapper tabl-res">
+		<div class="container-scroller">
+			<div class="container-fluid page-body-wrapper">
+				<div class="main-panel">
+					<div class="content-wrapper">
+						<div class="row">
+							<div>
+								<div class="card">
+                                    <div class="table-responsive ">
+                                        <table class="table th-color project-orders-table " border="1px" >
+                                            <thead >
+                                                <tr>
+                                                    <th>Run / </br> Cible</th>
+                                                    <th>Cible 1</th>
+                                                    <th>Cible 2</th>
+                                                    <th>Cible 3</th>
+                                                    <th>Total </br> points</th>
+                                                    <th>Temps</th>													
+                                                    <th>Malus </br>Temps</th>
+                                                    <th> Bonus</br>Cible</th>
+                                                    <th> Total </br> run </th>
+                                                    <th> Total </br> cumulé </th>
+                                                </tr>
+                                            </thead>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="10" class="table"> Single shot au chronomètre</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td><input type="text" step="1" class="table" name="cible1_r1"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><input type="text" step="1" class="table" name="tmps_r1"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td><input type="text" step="1" class="table" name="cible1_r2"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><input type="text" step="1" class="table" name="tmps_r2"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td><input type="text" step="1" class="table" name="cible1_r3"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><input type="text" step="1" class="table" name="tmps_r3"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="10" class="table">Triple shot au chronomètre</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td><input type="text" step="1" class="table" name="cible1_r4"></td>
+                                                    <td><input type="text" step="1" class="table" name="cible2_r4"></td>
+                                                    <td><input type="text" step="1" class="table" name="cible3_r4"></td>
+                                                    <td></td>
+                                                    <td><input type="text" step="1" class="table" name="tmps_r4"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td><input type="text" step="1" class="table" name="cible1_r5"></td>
+                                                    <td><input type="text" step="1" class="table" name="cible2_r5"></td>
+                                                    <td><input type="text" step="1" class="table" name="cible3_r5"></td>
+                                                    <td></td>
+                                                    <td><input type="text" step="1" class="table" name="tmps_r5"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td><input type="text" step="1" class="table" name="cible1_r6"></td>
+                                                    <td><input type="text" step="1" class="table" name="cible2_r6"></td>
+                                                    <td><input type="text" step="1" class="table" name="cible3_r6"></td>
+                                                    <td></td>
+                                                    <td><input type="text" step="1" class="table" name="tmps_r6"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td id="total"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>										
+                                    </div>
+                                </div>										
+                            </div>
+                        </div>										
+                    </div>
+                </div>					
+            </div>
+        </div>						
+    </div>
+</div>
+<script>
+    document.getElementById("total").style.backgroundColor = "#fffbb0";
+    $("#tableau_cetower td input[type=text]").on('change', (elem) => {
+        let parent = $(elem.target).parent().parent();
+        let fields = ['cibleav', 'ciblelat', 'ciblear'];
+
+        let sum = 0;
+        fields.forEach(field => {
+            parent.find(`[${field}]`).val().split(' ').forEach(num => {
+                if (num == '') return;
+                sum += parseInt(num);
+            });
+        });
+
+
+        // let sum = parseInt(parent.find('[cibleav]').val() || 0)+parseInt(parent.find('[ciblelat]').val() || 0)+parseInt(parent.find('[ciblear]').val() || 0);
+        parent.find('[points]').val(sum);
+    });
+</script>

@@ -1,0 +1,63 @@
+<div class="card accordion-item active border border-dark js-quizz-elem-main" name="quizz-elem-{{idQ}}" id="quizz-elem-{{idQ}}" data-qid="{{idQ}}">
+    <h2 class="accordion-header" id="heading{{idQ}}">
+        <button type="button" class="accordion-button" data-bs-toggle="{{addCollapseEvent|default('collapse')}}" data-bs-target="#accordion{{idQ}}" aria-expanded="true" aria-controls="accordion{{idQ}}">
+            Item #{{qCount}}
+        </button>
+    </h2>
+    <div id="accordion{{idQ}}" class="accordion-collapse collapse {{showElem}}" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Catégorie</span>
+						<select id="param1-select" class="form-control" name="q_{{idQ}}">
+							<option disabled selected>Sélectionner une catégorie</option>
+							<option value="CLEc3">Club élite</option>
+							<option value="CL1c3">Club 1</option>
+							<option value="CP1c3">Poney 1</option>
+							<option value="CA1c3">Poney A1</option>
+							<option value="CL2c3">Club 2</option>
+							<option value="CP2c3">Poney 2</option>
+							<option value="CA2c2">Poney A2</option>
+							<option value="CL3c2">Club 3</option>
+							<option value="CP3c2">Poney 3</option>
+                            <option value="CL1eq">Club 1 équipe</option>
+                            <option value="C1pa">Club 1 paire</option>
+                            <option value="CL2eq">Club 2 équipe</option>
+						</select>
+            </div>
+
+            <div class="divider divider-info mb-3">
+                <div class="divider-text">Epreuves</div>
+            </div>
+
+            <div class="row js-quizz-answers" data-qid="{{idQ}}">
+                {% if question is empty or question.a is empty %}
+                    {{ include('creaconc/conc/tpl_epreuves.html.twig', {idR: '1', answer:''})}}
+                    {{ include('creaconc/conc/tpl_epreuves.html.twig', {idR: '2', answer:''})}}
+                    <input type="hidden" name="quizz_q_{{idQ}}_a_nb" id="quizz_q_{{idQ}}_a_nb" value="{{question.max_a_id|default('2')}}"/>
+                {% else %}
+                    {% for keyA, answerO in question.a %}
+                        {{ include('creaconc/conc/tpl_epreuves.html.twig', {idR: keyA, answer: answerO})}}
+                    {% endfor %}
+                    <input type="hidden" name="quizz_q_{{idQ}}_a_nb" id="quizz_q_{{idQ}}_a_nb" value="{{question.max_a_id}}"/>
+                {% endif %}
+            </div>
+
+            <div class="col-xl-12">
+                <button class="btn btn-info px-5 js-quizz-answer-add">Ajouter une épreuve</button>
+            </div>
+
+            <div class="text-end col-xl-12 mt-3">
+                <button class="btn btn-warning px-5 js-quizz-elem-delete">Supprimer cet élément</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

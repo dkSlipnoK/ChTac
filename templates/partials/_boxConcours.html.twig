@@ -1,0 +1,62 @@
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="container-scroller">
+			<div class="container-fluid page-body-wrapper">
+				<div class="main-panel">
+					<div class="content-wrapper">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card">
+									<div class="table-responsive ">
+										<table class="table table-striped project-orders-table">
+											<thead class="th-color">
+												<tr>
+													<th>Lieu</th>
+													<th>Date</th>
+													<th>Club</th>
+													<th>Information</th>
+												</tr>
+											</thead>
+											{# affichage des concours #}
+											<tbody class="tb-color">
+											{% for conc in concours %}
+													<tr>
+														<td>{{ conc.location }}</td>
+														<td>{{ conc.dateD|date("d/m/Y") }}</td>
+														<td>{{ conc.club }}</td>
+														<td>
+															<a href="{{ path('resources_info',{id: conc.id}) }}" type="button" class="btn btn-success btn-sm btn-icon-text mr-3" >
+																info
+																<i class="typcn typcn-edit btn-icon-append"></i>
+															</a>
+															<a href="{{ path('resources_insertPart',{id: conc.id}) }}" type="button" class="btn btn-success btn-sm btn-icon-text mr-3" >
+																Part
+																<i class="typcn typcn-edit btn-icon-append"></i>
+															</a>
+														</td>
+													</tr>
+													
+											{% endfor %}										
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+					<div class="d-flex align-items-center btn-cc">
+
+						{# <a href="" class="btn btn-info btn-sm btn-icon-text mr-3" >
+							Dupliquer
+							<i class="typcn typcn-cilpboard btn-icon-append"></i>
+						</a>
+						<a href="" class="btn btn-success btn-sm btn-icon-text mr-3">
+							Modifier
+							<i class="typcn typcn-edit btn-icon-append"></i>
+						</a> #}
+						<a href = " {{path ('resources_create')}}" class ="btn btn-success btn-sm btn-icon-text mr-3">
+							Créer
+							<i class="typcn typcn-edit btn-icon-append"></i>
+						</a>
+						
+					</div>

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte de {{app.user.username}} !!!!
+{% endblock %}
+{% block header %}
+	{% include "partials/_partials.html.twig" %}
+	<div class="container-fluid page-body-wrapper">
+		{% include "partials/_navbar.html.twig" %}
+		{% include "partials/_sidebar.html.twig" %}
+{% endblock %}
+{% block body %}
+		<div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="table-responsive ">
+                                <form method="post" action="{{path ('app_savePart')}}">
+                                    <table class="table table-striped project-orders-table" id="kids">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="5" class="table">Participants</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                
+                                                <td>Nom : <input type="text" name="nom"></td>
+                                                <td>Prénom : <input type="text" name="prenom"></td>
+                                                <td>Cheval : <input type="text" name="nCheval"></td>
+                                                <td>Club : <input type="text" name="club"></td>
+                                            </tr>
+                                            <tr>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <label for="cat">catégorie :</label>
+                                                    <select id="cat" name="cat">
+                                                        <option disabled selected>Catégorie</option>
+                                                        <option value="Club elite">Club elite</option>
+                                                        <option value="Club 1">Club 1</option>
+                                                        <option value="Poney 1">Poney 1</option>
+                                                        <option value="Poney A1">Poney A1</option>
+                                                        <option value="Club 2">Club 2</option>
+                                                        <option value="Poney 2">Poney 2</option>
+                                                        <option value="Club 3">Club 3</option>
+                                                        <option value="Poney 3">Poney 3</option>
+                                                    </select>
+                                                </td>
+                                                
+
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <input type="submit" class="btn btn-success btn-sm btn-icon-text mr-3">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+{% endblock %}

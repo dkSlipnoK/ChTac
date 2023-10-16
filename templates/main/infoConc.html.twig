@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info !!!
+{% endblock %}
+{% block header %}
+	{% include "partials/_partials.html.twig" %}
+	<div class="container-fluid page-body-wrapper">
+		{% include "partials/_navbar.html.twig" %}
+		{% include "partials/_sidebar.html.twig" %}
+{% endblock %}
+{% block body %}
+        {% include "partials/_info.html.twig" %}
+    </div>
+{% endblock %}

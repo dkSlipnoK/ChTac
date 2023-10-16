@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil !!!
+{% endblock %}
+{% block header %}
+	{% include "partials/_partials.html.twig" %}
+	<div class="container-fluid page-body-wrapper">
+		{% include "partials/_navbar.html.twig" %}
+		{% include "partials/_sidebar.html.twig" %}
+{% endblock %}
+{% block body %}
+		<div class="boite-col">
+			<div class="content-wrapper ">
+				<div class="content-wrapper ">
+					<form class="param">
+
+						<input type="checkbox" id="ffe">ffe</input>
+						<input type="checkbox" id="gof">gof</input></br>
+						<label for="param1-select">Catégorie :</label>
+						<select id="param1-select" name="param1">
+							<option disabled selected>Sélectionner une catégorie</option>
+							<option value="1">Club elite</option>
+							<option value="2">Club 1</option>
+							<option value="3">Poney 1</option>
+							<option value="4">Poney A1</option>
+							<option value="5">Club 2</option>
+							<option value="6">Poney 2</option>
+							<option value="7">Club 3</option>
+							<option value="8">Poney 3</option>
+						</select>
+						<label for="param2-select">Epreuve :</label>
+						<select id="param2-select" name="param2">
+							<option disabled selected>Sélectionner une épreuve</option>
+							<option value="A">Tower</option>
+							<option value="B">Raid</option>
+							<option value="C">Polonaise</option>
+							<option value="D">Skirmish</option>
+						</select>
+						<button type="button" id="submit-button">Submit</button>
+					</form>	
+				</div>							
+			</div>
+			<div class="part">
+				<p>n° Dossard : </p>
+				<p>Nom Participant :</p>
+				<p>Equidé : </p>
+			</div>
+			<div class="table-responsive pt-3" id="table-container">
+				<div class="content-wrapper">
+					<div class="content-wrapper">	
+						<p> Le tableau s'affichera ici !!!</p>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- changement de tableau -->
+	<script>
+	$(document).ready(function() {
+		$('#submit-button').click(function() {
+			var param1 = $('#param1-select').val();
+			var param2 = $('#param2-select').val();
+
+			$.ajax({
+				url: '/load/table/',
+				type: 'GET',
+				data: {
+					param1: param1,
+					param2: param2
+				},
+				success: function(html) {
+					$('#table-container').html(html);
+				}
+			});
+		});
+	});
+	</script>
+{% endblock %}

@@ -1,0 +1,115 @@
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="table-responsive ">
+						<form method="post" action="{{path ('resources_create')}}">
+							<table class="table table-striped project-orders-table" id="kids">
+								<thead class="th-color">
+									<tr>
+										<th colspan="5" class="table">Information du Concours</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="2">Date :
+											<input type="date" name="dateD"></td>
+										<td colspan="2">Nom :
+											<input type="text" name="nom"></td>
+									</tr>
+									<tr>
+										<td colspan="2">Lieu :
+											<input type="text" name="locations"></td>
+										<td colspan="2">Club :
+											<input type="text" name="club"></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="row mb-3">
+								<div class="accordion" id="accordionQuizz">
+									{% set qCount = 1 %}
+									{% if quizzContent is empty %}
+										{{ include('creaconc/conc/tpl_cat.html.twig', {idQ:'1', showElem:'', question:''})}}
+										{% set qCount = qCount + 1 %}
+										{{ include('creaconc/conc/tpl_cat.html.twig', {idQ:'2', showElem:'', question:''})}}
+										{% set qCount = qCount + 1 %}
+										<input type="hidden" name="quizz_q_nb" id="quizz_q_nb" value="2"/>
+									{% else %}
+										{% for keyQ, question in quizzContent.q %}
+											{% set key = keyQ|replace({'q': ''}) %}
+											{% set showElem = ( qCount == 1 ? 'show' : '' ) %}
+											{{ include('creaconc/conc/tpl_cat.html.twig', {idQ: key, showElem: showElem, question: question })}}
+											{% set qCount = qCount + 1 %}
+										{% endfor %}
+										<input type="hidden" name="quizz_q_nb" id="quizz_q_nb" value="{{quizzContent.max_q_id}}"/>
+									{% endif %}
+								</div>
+							</div>
+							<div class="col-xl-12">
+								<button class="btn btn-secondary px-5 js-quizz-elem-add">Ajouter un élément</button>
+							</div>
+							<div class="d-none" id="quizz_tpl_empty_q">
+								{{ include('creaconc/conc/tpl_cat.html.twig', {idQ:'%IDQ%', showElem:'', question: '', addCollapseEvent: '%COLLAPSE%', qCount: 'Nouveau'})}}
+							</div>
+							<div class="d-none" id="quizz_tpl_empty_a">
+								{{ include('creaconc/conc/tpl_epreuves.html.twig', {idQ:'%IDQ%', idR:'%IDR%', answer: '', showElem:'', addCollapseEvent: '%COLLAPSE%'})}}
+							</div>
+
+							<div class="col-xl-12">
+								<input type="submit" class="btn btn-primary px-5 ">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$('body').on('click', '.js-quizz-elem-add', function (e) {
+		let idQ = $('#quizz_q_nb').val() * 1;
+		if (isNaN(idQ)) {
+		idQ = 0;
+		}
+		let newIdQ = idQ + 1;
+
+		let contentE = $('#quizz_tpl_empty_q').html().replace(/%IDQ%/g, newIdQ + '').replace(/%COLLAPSE%/g, 'collapse');
+		$('#accordionQuizz').append(contentE);
+		$('#quizz_q_nb').attr('value', newIdQ);
+		e.stopPropagation();
+		e.preventDefault();
+	});
+
+	$('body').on('click', '.js-quizz-answer-delete', function (e) {
+		$(this).closest(".js-quizz-answer").remove();
+		e.stopPropagation();
+		e.preventDefault();
+	});
+
+	$('body').on('click', '.js-quizz-elem-delete', function (e) {
+		$(this).closest(".js-quizz-elem-main").remove();
+		e.stopPropagation();
+		e.preventDefault();
+	});
+
+	// $(".js-quizz-answer-add").on("click", function(e) {
+	$('body').on('click', '.js-quizz-answer-add', function (e) {
+		let idQ = $(this).closest(".js-quizz-elem-main").data("qid");
+		let idR = $("#quizz_q_" + idQ + "_a_nb").val() * 1;
+		if (isNaN(idR)) {
+		idR = 0;
+		}
+		let newIdR = idR + 1;
+		let contentR = $('#quizz_tpl_empty_a').html().replace(/%IDQ%/g, idQ + '').replace(/%IDR%/g, newIdR + '');
+			$(this).closest(".js-quizz-elem-main").find(".js-quizz-answers").append(contentR);
+				$("#quizz_q_" + idQ + "_a_nb").attr('value', newIdR);
+		e.stopPropagation();
+		e.preventDefault();
+		});
+	});
+
+
+</script>

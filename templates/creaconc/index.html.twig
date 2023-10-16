@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte de {{app.user.username}} !!!!
+{% endblock %}
+{% block header %}
+	{% include "partials/_partials.html.twig" %}
+	<div class="container-fluid page-body-wrapper">
+		{% include "partials/_navbar.html.twig" %}
+		{% include "partials/_sidebar.html.twig" %}
+
+		<link rel="stylesheet" href="{{asset('assets/vendors/css/core.css')}}" class="template-customizer-core-css"/>
+{% endblock %}
+{% block body %}
+		{% include "creaconc/conc/_creaconc.html.twig" %}
+	</div>
+{% endblock %}
